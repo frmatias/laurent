@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+import matplotlib as mlp
 import cmath 
 import math
 import random
@@ -69,8 +71,10 @@ plt.show()
 
 
 fig = plt.figure()
-ax = fig.gca(projection='3d')
-ax.plot(ep, fz_real, fz_img, label='parametric curve')
-ax.legend()
+ax = fig.add_subplot(111, projection='3d')
+ax.scatter(ep, fz_real, fz_img)
+ax.set_xlabel('X Label')
+ax.set_ylabel('Y Label')
+ax.set_zlabel('Z Label')
 plt.show()
 
