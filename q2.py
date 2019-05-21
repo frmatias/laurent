@@ -4,15 +4,14 @@ import cmath
 import math
 import random
 
-#definindo as duas possíveis séries de acordo com o módulo de 5
-def absLower(n, z):
-    value = (((-1)**n)*(z**n))/((5)**(n+1))
+#definindo as duas possíveis séries de acordo com o módulo de z>2>1 ou 1<z<2
+def absBetween(n, z):
+    value = ((-1*(1/((2**(n+1)))))*(z**n)) - (1/(z**(n+1)))
     return value
 
 def absUpper(n, z):
-    if n > 0:
-        value = -1*(((-1)**n)*((5)**(n-1)))/(z**n)
-        return value
+    value = (1/(z**(n+1)))*((2**n)-1)
+    return value
 
 
 #inicializando o variável que irá guardar f(z)
@@ -20,7 +19,7 @@ sum_laurent = 0
 #número de zs para testar
 z_test = 10
 #número de interações
-epochs = 3
+epochs  = input('Entre com o 1º valor: ')
 #array para guardar a parte img
 z_img = []
 #array para guardar a parte real
@@ -38,10 +37,10 @@ for j in range(0, z_test):
     z = complex(real, img)
     
     for interator in range(0,epochs):
-        if abs(z) > 5:
-            sum_laurent = absUpper(interator, z)            
-        if abs(z) < 5:
-            sum_laurent = absLower(interator, z)
+        if abs(z) > 1 and abs(z) < 2:
+            sum_laurent = absBetween(interator, z)            
+        if abs(z) >2 and abs(z) > 1:
+            sum_laurent = absUpper(interator, z)
     print('=======================')        
     print('Resultado:')        
     print('z = ', z)
