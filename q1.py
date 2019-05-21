@@ -25,8 +25,9 @@ epochs = 3
 z_img = []
 #array para guardar a parte real
 z_real = []
-fz = []
-#for para escolher um z e calcular o fz respectivo
+fz_img = []
+fz_real = []
+ep = []#for para escolher um z e calcular o fz respectivo
 for j in range(0, z_test):
     
     img = random.randrange(-20, 20, 1)
@@ -47,7 +48,9 @@ for j in range(0, z_test):
     print('z = ', z)
     print('f(z) = ', sum_laurent)
     print('=======================')
-    fz.append(sum_laurent)
+    fz_img.append(sum_laurent.imag)
+    fz_real.append(sum_laurent.imag)
+    ep.append(j)
     sum_laurent = 0
         
         
@@ -64,8 +67,10 @@ plt.show()
 
 #gráfico para cada f(z)
 
-plt.plot(fz, scalex = True)
-plt.ylabel('F(Z)')
-plt.xlabel('z_test')
+
+fig = plt.figure()
+ax = fig.gca(projection='3d')
+ax.plot(ep, fz_real, fz_img, label='parametric curve')
+ax.legend()
 plt.show()
 
