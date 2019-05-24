@@ -8,20 +8,21 @@ import random
 
 #definindo as duas possíveis séries de acordo com o módulo de z>2>1 ou 1<z<2
 def absBetween(n, z):
-    value = ((-1*(1/((2**(n+1)))))*(z**n)) - (1/(z**(n+1)))
+    value = (-1)*((1/((z)**(n+1))) + (((z)**n)/((2)**(n+1))))
     return value
 
 def absUpper(n, z):
-    value = (1/(z**(n+1)))*((2**n)-1)
+    value = (((2)**n)-1)/((z)**n)
     return value
 
 
 #inicializando o variável que irá guardar f(z)
 sum_laurent = 0
 #número de zs para testar
-z_test = 10
+z_test = 20000
 #número de interações
-epochs = 3 
+epochs = 3
+
 z_img = []
 #array para guardar a parte real
 z_real = []
@@ -32,7 +33,7 @@ ep = []
 for j in range(0, z_test):
     
     img = random.randrange(-20, 20, 1)
-    real = random.randrange(-10, 10, 1)
+    real = random.randrange(-20, 20, 1)
     
     z_img.append(img)
     z_real.append(real)
@@ -47,6 +48,7 @@ for j in range(0, z_test):
     print('=======================')        
     print('Resultado:')        
     print('z = ', z)
+    print('|z|: ', abs(z))
     print('f(z) = ', sum_laurent)
     print('=======================')
     fz_img.append(sum_laurent.imag)
@@ -72,8 +74,8 @@ plt.show()
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 ax.scatter(ep, fz_real, fz_img)
-ax.set_xlabel('X Label')
-ax.set_ylabel('Y Label')
-ax.set_zlabel('Z Label')
+ax.set_xlabel('Interações')
+ax.set_ylabel('Real')
+ax.set_zlabel('Img')
 plt.show()
 

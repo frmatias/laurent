@@ -13,16 +13,16 @@ def absLower(n, z):
 
 def absUpper(n, z):
     if n > 0:
-        value = -1*(((-1)**n)*((5)**(n-1)))/(z**n)
+        value = (-1*(((-1)**n)*((5)**(n-1))))/(z**n)
         return value
 
 
 #inicializando o variável que irá guardar f(z)
 sum_laurent = 0
 #número de zs para testar
-z_test = 10
+z_test = 2000
 #número de interações
-epochs = 3
+epochs = 200
 #array para guardar a parte img
 z_img = []
 #array para guardar a parte real
@@ -32,8 +32,8 @@ fz_real = []
 ep = []#for para escolher um z e calcular o fz respectivo
 for j in range(0, z_test):
     
-    img = random.randrange(-20, 20, 1)
-    real = random.randrange(-10, 10, 1)
+    img = random.randrange(-10, 10, 1)
+    real = random.randrange(-2, 2, 1)
     
     z_img.append(img)
     z_real.append(real)
@@ -48,11 +48,14 @@ for j in range(0, z_test):
     print('=======================')        
     print('Resultado:')        
     print('z = ', z)
+    print('|z|: ', abs(z))
     print('f(z) = ', sum_laurent)
     print('=======================')
-    fz_img.append(sum_laurent.imag)
-    fz_real.append(sum_laurent.imag)
-    ep.append(j)
+    if abs(z) != 5 :
+        fz_img.append(sum_laurent.imag)
+        fz_real.append(sum_laurent.imag)
+        ep.append(j)
+    
     sum_laurent = 0
         
         
@@ -73,8 +76,8 @@ plt.show()
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 ax.scatter(ep, fz_real, fz_img)
-ax.set_xlabel('X Label')
-ax.set_ylabel('Y Label')
-ax.set_zlabel('Z Label')
+ax.set_xlabel('Interações')
+ax.set_ylabel('Real')
+ax.set_zlabel('Img')
 plt.show()
 
